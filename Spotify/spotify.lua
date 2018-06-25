@@ -4,8 +4,7 @@ local awful = require("awful")
 spotify_widget = wibox.widget.textbox()
 
 function updateSpotifyWidget(widget)
-  local current = awful.util.pread('sp current-oneline')
-  widget:set_text(current)
+  awful.spawn.easy_async('sp current-oneline', function(stdout) widget:set_text(stdout) end)
 end
 
 spotify_timer = timer ({timeout = 10})
